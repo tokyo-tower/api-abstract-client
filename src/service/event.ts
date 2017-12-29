@@ -30,7 +30,13 @@ export class EventService extends Service {
         return this.fetch({
             uri: '/performances',
             method: 'GET',
-            qs: params,
+            qs: {
+                limit: params.limit,
+                page: params.page,
+                start_from: params.startFrom,
+                start_through: params.startThrough,
+                wheelchair: params.wheelchair
+            },
             expectedStatusCodes: [OK]
         });
     }
