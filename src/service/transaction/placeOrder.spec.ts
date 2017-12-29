@@ -123,7 +123,8 @@ describe('placeOrder transaction sasaki.service', () => {
         sandbox.mock(transactions).expects('fetch').once().resolves(data);
 
         const result = await transactions.confirm({
-            transactionId: 'transactionId'
+            transactionId: 'transactionId',
+            paymentMethod: <any>'CreditCard'
         });
         assert.deepEqual(result, data);
     });
