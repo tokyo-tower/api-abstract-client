@@ -3,9 +3,14 @@ import { OK } from 'http-status';
 
 import { Service } from '../service';
 
+/**
+ * パフォーマンス検索結果インターフェース
+ * @export
+ * @interface
+ */
 export interface ISearchPerformancesResult {
     meta: { number_of_performances: number; number_of_films: number; };
-    data: factory.performance.IPerformanceWithDetails[];
+    data: factory.performance.IPerformanceWithAvailability[];
 }
 
 /**
@@ -20,7 +25,7 @@ export class EventService extends Service {
         /**
          * 検索条件
          */
-        params: any
+        params: factory.performance.ISearchConditions
     ): Promise<ISearchPerformancesResult> {
         return this.fetch({
             uri: '/performances',
