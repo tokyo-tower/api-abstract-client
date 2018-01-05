@@ -11,6 +11,7 @@ import { AuthClient } from './auth/authClient';
 
 import { EventService } from './service/event';
 import { PlaceOrderTransactionService } from './service/transaction/placeOrder';
+import { ReturnOrderTransactionService } from './service/transaction/returnOrder';
 import * as transporters from './transporters';
 
 export import factory = factory;
@@ -33,9 +34,14 @@ export namespace service {
     export class Event extends EventService { }
     export namespace transaction {
         /**
-         * placeOrder transaction service
+         * 注文取引サービス
          * @class
          */
         export class PlaceOrder extends PlaceOrderTransactionService { }
+        /**
+         * 返品取引サービス
+         * @class
+         */
+        export class ReturnOrder extends ReturnOrderTransactionService { }
     }
 }

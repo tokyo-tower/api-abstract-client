@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 - パフォーマンス検索サービスを追加。
 - 注文取引サービスを追加。
+- 返品取引サービスを追加。
 
 ### Changed
 
