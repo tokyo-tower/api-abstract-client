@@ -19,7 +19,7 @@ export interface ISearchPerformancesResult {
  */
 export class EventService extends Service {
     /**
-     * 上映イベント検索
+     * イベント検索
      */
     public async searchPerformances(
         /**
@@ -37,6 +37,22 @@ export class EventService extends Service {
                 start_through: params.startThrough,
                 wheelchair: params.wheelchair
             },
+            expectedStatusCodes: [OK]
+        });
+    }
+
+    /**
+     * IDでイベント検索
+     */
+    public async findPerofrmanceById(params: {
+        /**
+         * ID
+         */
+        id: string;
+    }): Promise<factory.performance.IPerformanceWithDetails> {
+        return this.fetch({
+            uri: `/performances/${params.id}`,
+            method: 'GET',
             expectedStatusCodes: [OK]
         });
     }
