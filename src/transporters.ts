@@ -80,10 +80,10 @@ export class DefaultTransporter implements Transporter {
         options.headers = (options.headers !== undefined) ? options.headers : {};
         // tslint:disable-next-line:no-single-line-block-comment
         /* istanbul ignore else */
-        if (!options.headers['User-Agent']) {
-            options.headers['User-Agent'] = DefaultTransporter.USER_AGENT;
-        } else if (options.headers['User-Agent'].indexOf(DefaultTransporter.USER_AGENT) === -1) {
-            options.headers['User-Agent'] = `${options.headers['User-Agent']} ${DefaultTransporter.USER_AGENT}`;
+        if (!(<any>options.headers)['User-Agent']) {
+            (<any>options.headers)['User-Agent'] = DefaultTransporter.USER_AGENT;
+        } else if ((<any>options.headers)['User-Agent'].indexOf(DefaultTransporter.USER_AGENT) === -1) {
+            (<any>options.headers)['User-Agent'] = `${(<any>options.headers)['User-Agent']} ${DefaultTransporter.USER_AGENT}`;
         }
 
         return options;

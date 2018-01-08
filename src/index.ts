@@ -10,6 +10,7 @@ import * as factory from '@motionpicture/ttts-factory';
 import { AuthClient } from './auth/authClient';
 
 import { EventService } from './service/event';
+import { OrderService } from './service/order';
 import { OrganizationService } from './service/organization';
 import { PlaceOrderTransactionService } from './service/transaction/placeOrder';
 import { ReturnOrderTransactionService } from './service/transaction/returnOrder';
@@ -33,6 +34,11 @@ export namespace service {
      * @class
      */
     export class Event extends EventService { }
+    /**
+     * 注文サービス
+     * @class
+     */
+    export class Order extends OrderService { }
     /**
      * 組織サービス
      * @class

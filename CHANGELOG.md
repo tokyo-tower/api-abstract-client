@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 注文取引サービスを追加。
 - 返品取引サービスを追加。
 - 組織サービスを追加。
+- 注文サービスを追加。
 
 ### Changed
 

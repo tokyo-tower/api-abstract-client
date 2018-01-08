@@ -151,7 +151,7 @@ describe('CONFIGURE()', () => {
         };
 
         const result = DefaultTransporter.CONFIGURE(options);
-        assert(result.headers['User-Agent'].indexOf(DefaultTransporter.USER_AGENT) > 0);
+        assert((<any>result.headers)['User-Agent'].indexOf(DefaultTransporter.USER_AGENT) > 0);
         sandbox.verify();
     });
 });
