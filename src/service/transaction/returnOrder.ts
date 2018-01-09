@@ -61,4 +61,26 @@ export class ReturnOrderTransactionService extends Service {
             }
         });
     }
+
+    /**
+     * 確定した取引に関して、購入者にメール通知を送信する
+     * @returns {Promise<factory.task.sendEmailNotification.ITask>} メール送信タスク
+     */
+    public async sendEmailNotification(params: {
+        /**
+         * 取引ID
+         */
+        transactionId: string;
+        /**
+         * Eメールメッセージ属性
+         */
+        emailMessageAttributes: factory.creativeWork.message.email.IAttributes
+    }): Promise<factory.task.sendEmailNotification.ITask> {
+        return this.fetch({
+            uri: `/transactions/returnOrder/${params.transactionId}/tasks/sendEmailNotification`,
+            method: 'POST',
+            expectedStatusCodes: [CREATED],
+            body: params.emailMessageAttributes
+        });
+    }
 }

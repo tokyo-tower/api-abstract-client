@@ -47,4 +47,17 @@ describe('返品取引サービス', () => {
         });
         assert.deepEqual(result, data);
     });
+
+    it('メール通知結果が期待通り', async () => {
+        const data = {};
+        sandbox.mock(transactions).expects('fetch').once().resolves(data);
+
+        const result = await transactions.sendEmailNotification({
+            transactionId: 'transactionId',
+            emailMessageAttributes: <any>{}
+        });
+
+        assert.deepEqual(result, data);
+        sandbox.verify();
+    });
 });

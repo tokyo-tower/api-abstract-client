@@ -14,7 +14,7 @@ import { StubAuthClient } from '../../auth/authClient';
 
 const API_ENDPOINT = 'https://localhost';
 
-describe('placeOrder transaction tttsapi.service', () => {
+describe('注文取引サービス', () => {
     let sandbox: sinon.SinonSandbox;
     let transactions: tttsapi.service.transaction.PlaceOrder;
 
