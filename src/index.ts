@@ -12,6 +12,7 @@ import { AuthClient } from './auth/authClient';
 import { EventService } from './service/event';
 import { OrderService } from './service/order';
 import { OrganizationService } from './service/organization';
+import { ReservationService } from './service/reservation';
 import { PlaceOrderTransactionService } from './service/transaction/placeOrder';
 import { ReturnOrderTransactionService } from './service/transaction/returnOrder';
 import * as transporters from './transporters';
@@ -44,6 +45,11 @@ export namespace service {
      * @class
      */
     export class Organization extends OrganizationService { }
+    /**
+     * 予約サービス
+     * @class
+     */
+    export class Reservation extends ReservationService { }
     export namespace transaction {
         /**
          * 注文取引サービス
