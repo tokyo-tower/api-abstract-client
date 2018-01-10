@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 組織サービスを追加。
 - 注文サービスを追加。
 - 予約サービスを追加。
+- 管理者サービスを追加。
 
 ### Changed
 

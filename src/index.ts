@@ -9,6 +9,7 @@ import * as factory from '@motionpicture/ttts-factory';
 
 import { AuthClient } from './auth/authClient';
 
+import { AdminService } from './service/admin';
 import { EventService } from './service/event';
 import { OrderService } from './service/order';
 import { OrganizationService } from './service/organization';
@@ -30,6 +31,11 @@ export import transporters = transporters;
 export abstract class Auth extends AuthClient { }
 
 export namespace service {
+    /**
+     * 管理者サービス
+     * @class
+     */
+    export class Admin extends AdminService { }
     /**
      * event service
      * @class

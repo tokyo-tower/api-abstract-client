@@ -3,9 +3,9 @@
  * @ignore
  */
 
-const sasaki = require('../');
+const tttsapi = require('../');
 
-const transactions = new sasaki.service.transaction.PlaceOrder({
+const transactions = new tttsapi.service.transaction.PlaceOrder({
     endpoint: 'https://example.com'
 });
 

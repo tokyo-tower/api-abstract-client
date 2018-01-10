@@ -8,7 +8,7 @@
 import { } from 'mocha';
 import * as assert from 'power-assert';
 import * as sinon from 'sinon';
-import * as sasaki from '../index';
+import * as tttsapi from '../index';
 
 import { StubAuthClient } from '../auth/authClient';
 
@@ -16,11 +16,11 @@ const API_ENDPOINT = 'https://localhost';
 
 describe('パフォーマンス検索', () => {
     let sandbox: sinon.SinonSandbox;
-    let events: sasaki.service.Event;
+    let events: tttsapi.service.Event;
 
     before(() => {
         const auth = new StubAuthClient();
-        events = new sasaki.service.Event({
+        events = new tttsapi.service.Event({
             auth: auth,
             endpoint: API_ENDPOINT
         });
@@ -47,7 +47,7 @@ describe('パフォーマンス検索', () => {
     });
 
     it('fetch結果が正常でなければエラーになるはず', async () => {
-        const error = new sasaki.transporters.RequestError('invalid request');
+        const error = new tttsapi.transporters.RequestError('invalid request');
         sandbox.mock(events).expects('fetch').once().rejects(error);
 
         const result = await events.searchPerformances({
@@ -62,11 +62,11 @@ describe('パフォーマンス検索', () => {
 
 describe('IDでパフォーマンス取得', () => {
     let sandbox: sinon.SinonSandbox;
-    let events: sasaki.service.Event;
+    let events: tttsapi.service.Event;
 
     before(() => {
         const auth = new StubAuthClient();
-        events = new sasaki.service.Event({
+        events = new tttsapi.service.Event({
             auth: auth,
             endpoint: API_ENDPOINT
         });
@@ -93,7 +93,7 @@ describe('IDでパフォーマンス取得', () => {
     });
 
     it('fetch結果が正常でなければエラーになるはず', async () => {
-        const error = new sasaki.transporters.RequestError('invalid request');
+        const error = new tttsapi.transporters.RequestError('invalid request');
         sandbox.mock(events).expects('fetch').once().rejects(error);
 
         const result = await events.findPerofrmanceById({
