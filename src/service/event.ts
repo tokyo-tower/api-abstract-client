@@ -9,7 +9,7 @@ import { Service } from '../service';
  * @interface
  */
 export interface ISearchPerformancesResult {
-    meta: { number_of_performances: number; number_of_films: number; };
+    meta: { number_of_performances: number; number_of_films: number };
     data: factory.performance.IPerformanceWithAvailability[];
 }
 

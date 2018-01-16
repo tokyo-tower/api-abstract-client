@@ -55,14 +55,14 @@ export class Service {
     public async fetch(options: IFetchOptions) {
         const defaultOptions = {
             headers: {},
-            method: 'GET'
+            method: 'GET',
+            ...options
         };
-        options = { ...defaultOptions, ...options };
 
         const baseUrl = this.options.endpoint;
-        let url = `${baseUrl}${options.uri}`;
+        let url = `${baseUrl}${defaultOptions.uri}`;
 
-        const querystrings = qs.stringify(options.qs);
+        const querystrings = qs.stringify(defaultOptions.qs);
         url += (querystrings.length > 0) ? `?${querystrings}` : '';
 
         const headers = {
@@ -70,21 +70,23 @@ export class Service {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-            ...options.headers
+            ...defaultOptions.headers
         };
 
         const fetchOptions = {
-            method: options.method,
+            method: defaultOptions.method,
             headers: headers,
-            body: JSON.stringify(options.body)
+            body: JSON.stringify(defaultOptions.body)
         };
 
         // create request (using authClient or otherwise and return request obj)
         if (this.options.auth !== undefined) {
-            return this.options.auth.fetch(url, fetchOptions, options.expectedStatusCodes);
+            return this.options.auth.fetch(url, fetchOptions, defaultOptions.expectedStatusCodes);
         } else {
             const transporter =
-                (this.options.transporter !== undefined) ? this.options.transporter : new DefaultTransporter(options.expectedStatusCodes);
+                (this.options.transporter !== undefined)
+                    ? this.options.transporter
+                    : new DefaultTransporter(defaultOptions.expectedStatusCodes);
 
             return transporter.fetch(url, fetchOptions);
         }

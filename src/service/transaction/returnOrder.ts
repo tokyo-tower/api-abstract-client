@@ -46,7 +46,7 @@ export class ReturnOrderTransactionService extends Service {
         /**
          * 返品理由
          */
-        reason: factory.transaction.returnOrder.Reason
+        reason: factory.transaction.returnOrder.Reason;
     }): Promise<IConfirmResult> {
         return this.fetch({
             uri: '/transactions/returnOrder/confirm',
@@ -74,7 +74,7 @@ export class ReturnOrderTransactionService extends Service {
         /**
          * Eメールメッセージ属性
          */
-        emailMessageAttributes: factory.creativeWork.message.email.IAttributes
+        emailMessageAttributes: factory.creativeWork.message.email.IAttributes;
     }): Promise<factory.task.sendEmailNotification.ITask> {
         return this.fetch({
             uri: `/transactions/returnOrder/${params.transactionId}/tasks/sendEmailNotification`,

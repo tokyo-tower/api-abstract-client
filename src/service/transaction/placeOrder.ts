@@ -243,7 +243,7 @@ export class PlaceOrderTransactionService extends Service {
         /**
          * Eメールメッセージ属性
          */
-        emailMessageAttributes: factory.creativeWork.message.email.IAttributes
+        emailMessageAttributes: factory.creativeWork.message.email.IAttributes;
     }): Promise<factory.task.sendEmailNotification.ITask> {
         return this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/tasks/sendEmailNotification`,
