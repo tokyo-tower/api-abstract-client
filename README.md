@@ -25,8 +25,8 @@ npm install @motionpicture/ttts-api-abstract-client
 
 ### Environment variables
 
-| Name    | Required | Value                       | Purpose |
-| ------- | -------- | --------------------------- | ------- |
+| Name    | Required | Value                      | Purpose |
+| ------- | -------- | -------------------------- | ------- |
 | `DEBUG` | false    | ttts-api-abstract-client:* | Debug   |
 
 
