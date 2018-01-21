@@ -51,7 +51,7 @@ export class AdminService extends Service {
      */
     public async search(params: {
         group?: string;
-    }): Promise<IAdmin> {
+    }): Promise<IAdmin[]> {
         return this.fetch({
             uri: '/admins',
             method: 'GET',
