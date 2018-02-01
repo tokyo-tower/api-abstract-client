@@ -202,7 +202,8 @@ export class PlaceOrderTransactionService extends Service {
                 email: params.contact.email,
                 tel: params.contact.tel,
                 age: params.contact.age,
-                gender: params.contact.gender
+                gender: params.contact.gender,
+                address: params.contact.address
             }
         });
     }
