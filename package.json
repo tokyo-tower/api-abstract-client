@@ -58,7 +58,6 @@
     "@types/open": "0.0.29",
     "@types/power-assert": "^1.4.29",
     "@types/qs": "^6.5.1",
-    "@types/request": "^2.0.11",
     "@types/sinon": "^2.3.7",
     "coveralls": "^2.13.3",
     "http-server": "^0.10.0",
@@ -79,7 +78,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "@motionpicture/ttts-factory": "0.0.0",
+    "@motionpicture/ttts-factory": "0.1.0-alpha.0",
     "debug": "^3.1.0",
     "http-status": "^1.0.1",
     "isomorphic-fetch": "^2.2.1",
