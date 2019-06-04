@@ -1,30 +1,14 @@
 import * as factory from '@motionpicture/ttts-factory';
-import { NO_CONTENT, OK } from 'http-status';
+import { CREATED, NO_CONTENT, OK } from 'http-status';
 
-import { Service } from '../service';
+import { ISearchResult, Service } from '../service';
 
-/**
- * 予約検索条件インターフェース
- * @export
- * @interface
- */
-export interface ISearchConditions {
-    status?: factory.reservationStatusType;
-    performanceId?: string;
-    performanceStartFrom?: Date;
-    performanceStartThrough?: Date;
-    performanceEndFrom?: Date;
-    performanceEndThrough?: Date;
-}
+export interface IPublishPrintTokenResult { token: string; }
 
 /**
  * 予約サービス
- * @class
  */
 export class ReservationService extends Service {
-    /**
-     * IDで予約検索
-     */
     public async findById(params: {
         id: string;
     }): Promise<factory.reservation.event.IReservation> {
@@ -33,7 +17,8 @@ export class ReservationService extends Service {
             method: 'GET',
             qs: params,
             expectedStatusCodes: [OK]
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
@@ -43,14 +28,39 @@ export class ReservationService extends Service {
         /**
          * 検索条件
          */
-        params: ISearchConditions
-    ): Promise<factory.reservation.event.IReservation[]> {
+        params: factory.reservation.event.ISearchConditions
+    ): Promise<ISearchResult<factory.reservation.event.IReservation[]>> {
         return this.fetch({
             uri: '/reservations',
             method: 'GET',
             qs: params,
             expectedStatusCodes: [OK]
-        });
+        })
+            .then(async (response) => {
+                return {
+                    totalCount: Number(<string>response.headers.get('X-Total-Count')),
+                    data: await response.json()
+                };
+            });
+    }
+
+    /**
+     * 予約検索
+     */
+    public async distinct(
+        field: string,
+        /**
+         * 検索条件
+         */
+        conditions: factory.reservation.event.ISearchConditions
+    ): Promise<any[]> {
+        return this.fetch({
+            uri: `/reservations/distinct/${field}`,
+            method: 'GET',
+            qs: conditions,
+            expectedStatusCodes: [OK]
+        })
+            .then(async (response) => response.json());
     }
 
     /**
@@ -60,7 +70,7 @@ export class ReservationService extends Service {
         reservationId: string;
         checkin: factory.reservation.event.ICheckin;
     }): Promise<void> {
-        return this.fetch({
+        await this.fetch({
             uri: `/reservations/${params.reservationId}/checkins`,
             method: 'POST',
             body: params.checkin,
@@ -75,11 +85,40 @@ export class ReservationService extends Service {
         reservationId: string;
         when: Date;
     }): Promise<void> {
-        return this.fetch({
+        await this.fetch({
             uri: `/reservations/${params.reservationId}/checkins/${params.when.toISOString()}`,
             method: 'DELETE',
             body: params,
             expectedStatusCodes: [NO_CONTENT]
         });
+    }
+
+    /**
+     * 予約キャンセル
+     */
+    public async cancel(params: {
+        id: string;
+    }): Promise<void> {
+        await this.fetch({
+            uri: `/reservations/${params.id}/cancel`,
+            method: 'PUT',
+            body: params,
+            expectedStatusCodes: [NO_CONTENT]
+        });
+    }
+
+    /**
+     * 予約印刷トークン発行
+     */
+    public async publishPrintToken(params: {
+        ids: string[];
+    }): Promise<IPublishPrintTokenResult> {
+        return this.fetch({
+            uri: '/reservations/print/token',
+            method: 'POST',
+            body: params,
+            expectedStatusCodes: [CREATED]
+        })
+            .then(async (response) => response.json());
     }
 }
