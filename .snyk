@@ -1,0 +1,27 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - '@motionpicture/ttts-factory > @cinerino/factory > @movieticket/reserve-api-nodejs-client > @movieticket/reserve-api-abstract-client > @motionpicture/mvtk-reserve-service > soap > request > hawk > hoek':
+        patched: '2019-07-12T23:52:58.163Z'
+    - '@motionpicture/ttts-factory > @cinerino/factory > @movieticket/reserve-api-nodejs-client > @movieticket/reserve-api-abstract-client > @motionpicture/mvtk-reserve-service > soap > request > hawk > boom > hoek':
+        patched: '2019-07-12T23:52:58.163Z'
+    - '@motionpicture/ttts-factory > @cinerino/factory > @movieticket/reserve-api-nodejs-client > @movieticket/reserve-api-abstract-client > @motionpicture/mvtk-reserve-service > soap > request > hawk > sntp > hoek':
+        patched: '2019-07-12T23:52:58.163Z'
+    - '@motionpicture/ttts-factory > @cinerino/factory > @movieticket/reserve-api-nodejs-client > @movieticket/reserve-api-abstract-client > @motionpicture/mvtk-reserve-service > soap > request > hawk > cryptiles > boom > hoek':
+        patched: '2019-07-12T23:52:58.163Z'
+  SNYK-JS-LODASH-450202:
+    - '@motionpicture/ttts-factory > lodash':
+        patched: '2019-07-12T23:52:58.163Z'
+    - '@motionpicture/ttts-factory > @motionpicture/gmo-service > request-promise-native > request-promise-core > lodash':
+        patched: '2019-07-12T23:52:58.163Z'
+    - '@motionpicture/ttts-factory > @cinerino/factory > @motionpicture/gmo-service > request-promise-native > request-promise-core > lodash':
+        patched: '2019-07-12T23:52:58.163Z'
+  'npm:lodash:20180130':
+    - '@motionpicture/ttts-factory > @cinerino/factory > @movieticket/reserve-api-nodejs-client > @movieticket/reserve-api-abstract-client > @motionpicture/mvtk-reserve-service > soap > lodash':
+        patched: '2019-07-12T23:52:58.163Z'
+  'npm:tunnel-agent:20170305':
+    - '@motionpicture/ttts-factory > @cinerino/factory > @movieticket/reserve-api-nodejs-client > @movieticket/reserve-api-abstract-client > @motionpicture/mvtk-reserve-service > soap > request > tunnel-agent':
+        patched: '2019-07-12T23:52:58.163Z'
