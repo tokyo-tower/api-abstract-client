@@ -1,16 +1,13 @@
 /**
  * 注文取引サービス
- * @namespace service.transaction.placeOrder
  */
-
 import * as factory from '@motionpicture/ttts-factory';
-import { CREATED, NO_CONTENT } from 'http-status';
+import { CREATED, NO_CONTENT, OK } from 'http-status';
 
-import { Service } from '../../service';
+import { ISearchResult, Service } from '../../service';
 
 /**
  * クレジットカード承認アクションに必要なクレジットカード情報インターフェース
- * @interface
  */
 export type ICreditCard =
     factory.paymentMethod.paymentCard.creditCard.IUncheckedCardRaw |
@@ -19,7 +16,6 @@ export type ICreditCard =
 
 /**
  * 承認アクションインターフェース
- * @interface
  */
 export interface IAuthorizeAction {
     id: string;
@@ -27,13 +23,11 @@ export interface IAuthorizeAction {
 
 /**
  * 注文取引サービス
- * @class PlaceOrderTransactionService
  */
 export class PlaceOrderTransactionService extends Service {
     /**
      * 取引を開始する
      * 開始できない場合(混雑中など)、nullが返されます。
-     * @returns {Promise<factory.transaction.placeOrder.ITransaction>} 取引オブジェクト
      */
     public async start(params: {
         /**
@@ -65,12 +59,12 @@ export class PlaceOrderTransactionService extends Service {
                 passportToken: params.passportToken
             },
             expectedStatusCodes: [CREATED]
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
      * 取引に座席予約を追加する
-     * @returns {Promise<factory.action.authorize.seatReservation.IAction>} 座席予約承認アクション
      */
     public async createSeatReservationAuthorization(params: {
         /**
@@ -94,12 +88,12 @@ export class PlaceOrderTransactionService extends Service {
                 performance_id: params.performanceId,
                 offers: params.offers
             }
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
      * 座席予約取消
-     * @returns {Promise<void>}
      */
     public async cancelSeatReservationAuthorization(params: {
         /**
@@ -111,7 +105,7 @@ export class PlaceOrderTransactionService extends Service {
          */
         actionId: string;
     }): Promise<void> {
-        return this.fetch({
+        await this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/actions/authorize/seatReservation/${params.actionId}`,
             method: 'DELETE',
             expectedStatusCodes: [NO_CONTENT]
@@ -120,7 +114,6 @@ export class PlaceOrderTransactionService extends Service {
 
     /**
      * クレジットカードのオーソリを取得する
-     * @returns {Promise<IAuthorizeAction>} 承認アクション
      */
     public async createCreditCardAuthorization(params: {
         /**
@@ -154,12 +147,12 @@ export class PlaceOrderTransactionService extends Service {
                 method: params.method,
                 creditCard: params.creditCard
             }
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
      * クレジットカードオーソリ取消
-     * @returns {void}
      */
     public async cancelCreditCardAuthorization(params: {
         /**
@@ -171,7 +164,7 @@ export class PlaceOrderTransactionService extends Service {
          */
         actionId: string;
     }): Promise<void> {
-        return this.fetch({
+        await this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/actions/authorize/creditCard/${params.actionId}`,
             method: 'DELETE',
             expectedStatusCodes: [NO_CONTENT]
@@ -180,7 +173,6 @@ export class PlaceOrderTransactionService extends Service {
 
     /**
      * register a customer contact
-     * @returns {Promise<factory.transaction.placeOrder.ICustomerContact>} 登録された購入者情報
      */
     public async setCustomerContact(params: {
         /**
@@ -205,12 +197,12 @@ export class PlaceOrderTransactionService extends Service {
                 gender: params.contact.gender,
                 address: params.contact.address
             }
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
      * 取引確定
-     * @returns {Promise<factory.transaction.placeOrder.IResult>} 作成された注文
      */
     public async confirm(params: {
         /**
@@ -229,12 +221,12 @@ export class PlaceOrderTransactionService extends Service {
             body: {
                 payment_method: params.paymentMethod
             }
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
      * 確定した取引に関して、購入者にメール通知を送信する
-     * @returns {Promise<factory.task.sendEmailNotification.ITask>} メール送信タスク
      */
     public async sendEmailNotification(params: {
         /**
@@ -251,6 +243,27 @@ export class PlaceOrderTransactionService extends Service {
             method: 'POST',
             expectedStatusCodes: [CREATED],
             body: params.emailMessageAttributes
-        });
+        })
+            .then(async (response) => response.json());
+    }
+
+    /**
+     * 取引検索
+     */
+    public async search(
+        params: factory.transaction.ISearchConditions<factory.transactionType.PlaceOrder>
+    ): Promise<ISearchResult<factory.transaction.ITransaction<factory.transactionType.PlaceOrder>[]>> {
+        return this.fetch({
+            uri: `/transactions/placeOrder`,
+            method: 'GET',
+            qs: params,
+            expectedStatusCodes: [OK]
+        })
+            .then(async (response) => {
+                return {
+                    totalCount: Number(<string>response.headers.get('X-Total-Count')),
+                    data: await response.json()
+                };
+            });
     }
 }

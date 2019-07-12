@@ -59,7 +59,8 @@ export class ReturnOrderTransactionService extends Service {
                 forcibly: params.forcibly,
                 reason: params.reason
             }
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
@@ -81,6 +82,7 @@ export class ReturnOrderTransactionService extends Service {
             method: 'POST',
             expectedStatusCodes: [CREATED],
             body: params.emailMessageAttributes
-        });
+        })
+            .then(async (response) => response.json());
     }
 }

@@ -1,12 +1,10 @@
 import * as factory from '@motionpicture/ttts-factory';
-import { OK } from 'http-status';
+import { NO_CONTENT, OK } from 'http-status';
 
-import { Service } from '../service';
+import { ISearchResult, Service } from '../service';
 
 /**
  * パフォーマンス検索結果インターフェース
- * @export
- * @interface
  */
 export interface ISearchPerformancesResult {
     meta: { number_of_performances: number; number_of_films: number };
@@ -14,8 +12,7 @@ export interface ISearchPerformancesResult {
 }
 
 /**
- * event service
- * @class EventService
+ * イベントサービス
  */
 export class EventService extends Service {
     /**
@@ -26,34 +23,54 @@ export class EventService extends Service {
          * 検索条件
          */
         params: factory.performance.ISearchConditions
-    ): Promise<ISearchPerformancesResult> {
+    ): Promise<ISearchResult<ISearchPerformancesResult>> {
         return this.fetch({
             uri: '/performances',
             method: 'GET',
             qs: {
-                limit: params.limit,
-                page: params.page,
+                ...params,
                 start_from: params.startFrom,
-                start_through: params.startThrough,
-                wheelchair: params.wheelchair
+                start_through: params.startThrough
             },
             expectedStatusCodes: [OK]
-        });
+        })
+            .then(async (response) => {
+                return {
+                    totalCount: Number(<string>response.headers.get('X-Total-Count')),
+                    data: await response.json()
+                };
+            });
     }
 
-    /**
-     * IDでイベント検索
-     */
     public async findPerofrmanceById(params: {
-        /**
-         * ID
-         */
         id: string;
     }): Promise<factory.performance.IPerformanceWithDetails> {
         return this.fetch({
             uri: `/performances/${params.id}`,
             method: 'GET',
             expectedStatusCodes: [OK]
+        })
+            .then(async (response) => response.json());
+    }
+
+    public async updateExtension(params: {
+        id: string;
+        reservationsAtLastUpdateDate?: factory.performance.IReservationAtLastupdateDate[];
+        onlineSalesStatus?: factory.performance.OnlineSalesStatus;
+        onlineSalesStatusUpdateUser?: string;
+        onlineSalesStatusUpdateAt?: Date;
+        evServiceStatus?: factory.performance.EvServiceStatus;
+        evServiceStatusUpdateUser?: string;
+        evServiceStatusUpdateAt?: Date;
+        refundStatus?: factory.performance.RefundStatus;
+        refundStatusUpdateUser?: string;
+        refundStatusUpdateAt?: Date;
+    }): Promise<void> {
+        await this.fetch({
+            uri: `/performances/${params.id}/extension`,
+            method: 'PUT',
+            body: params,
+            expectedStatusCodes: [NO_CONTENT]
         });
     }
 }

@@ -33,7 +33,8 @@ export class AdminService extends Service {
             uri: '/admins/me',
             method: 'GET',
             expectedStatusCodes: [OK]
-        });
+        })
+            .then(async (response) => response.json());
     }
     /**
      * ログイン中管理者のグループを取得する
@@ -43,7 +44,8 @@ export class AdminService extends Service {
             uri: '/admins/me/groups',
             method: 'GET',
             expectedStatusCodes: [OK]
-        });
+        })
+            .then(async (response) => response.json());
     }
 
     /**
@@ -57,6 +59,7 @@ export class AdminService extends Service {
             method: 'GET',
             expectedStatusCodes: [OK],
             qs: params
-        });
+        })
+            .then(async (response) => response.json());
     }
 }

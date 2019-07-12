@@ -1,16 +1,13 @@
 /**
  * 組織サービス
- * @namespace service.organization
  */
-
 import * as factory from '@motionpicture/ttts-factory';
 import { OK } from 'http-status';
 
 import { Service } from '../service';
 
 /**
- * organization service
- * @class OrganizationService
+ * 組織サービス
  */
 export class OrganizationService extends Service {
     /**
@@ -27,6 +24,7 @@ export class OrganizationService extends Service {
             method: 'GET',
             qs: {},
             expectedStatusCodes: [OK]
-        });
+        })
+            .then(async (response) => response.json());
     }
 }
