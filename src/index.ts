@@ -2,7 +2,7 @@
 /**
  * TTTS API Service Library for Javascript
  */
-import * as factory from '@motionpicture/ttts-factory';
+import * as factory from '@tokyotower/factory';
 
 import { AuthClient } from './auth/authClient';
 

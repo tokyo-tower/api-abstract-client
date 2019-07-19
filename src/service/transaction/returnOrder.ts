@@ -3,7 +3,7 @@
  * @namespace service.transaction.returnOrder
  */
 
-import * as factory from '@motionpicture/ttts-factory';
+import * as factory from '@tokyotower/factory';
 import { CREATED } from 'http-status';
 
 import { Service } from '../../service';

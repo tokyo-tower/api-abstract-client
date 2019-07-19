@@ -1,7 +1,7 @@
 /**
  * 組織サービス
  */
-import * as factory from '@motionpicture/ttts-factory';
+import * as factory from '@tokyotower/factory';
 import { OK } from 'http-status';
 
 import { Service } from '../service';
