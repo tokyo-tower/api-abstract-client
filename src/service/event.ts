@@ -1,4 +1,4 @@
-import * as factory from '@motionpicture/ttts-factory';
+import * as factory from '@tokyotower/factory';
 import { NO_CONTENT, OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';
@@ -27,11 +27,7 @@ export class EventService extends Service {
         return this.fetch({
             uri: '/performances',
             method: 'GET',
-            qs: {
-                ...params,
-                start_from: params.startFrom,
-                start_through: params.startThrough
-            },
+            qs: params,
             expectedStatusCodes: [OK]
         })
             .then(async (response) => {

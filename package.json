@@ -1,6 +1,6 @@
 {
   "name": "@motionpicture/ttts-api-abstract-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TTTS API abstract client library for Javascript.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -76,7 +76,7 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
-    "@motionpicture/ttts-factory": "^9.0.0",
+    "@tokyotower/factory": "^10.0.0",
     "debug": "^3.1.0",
     "http-status": "^1.0.1",
     "isomorphic-fetch": "^2.2.1",

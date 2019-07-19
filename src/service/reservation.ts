@@ -1,4 +1,4 @@
-import * as factory from '@motionpicture/ttts-factory';
+import * as factory from '@tokyotower/factory';
 import { CREATED, NO_CONTENT, OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';

@@ -1,4 +1,4 @@
-import * as factory from '@motionpicture/ttts-factory';
+import * as factory from '@tokyotower/factory';
 import { OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';
@@ -10,12 +10,11 @@ export class OrderService extends Service {
     /**
      * 照会キーで注文情報を取得する
      */
-    public async findByOrderInquiryKey(
-        /**
-         * 注文照会キー
-         */
-        params: factory.order.IOrderInquiryKey
-    ): Promise<factory.order.IOrderInquiryResult> {
+    public async findByOrderInquiryKey(params: {
+        performanceDay: string;
+        paymentNo: string;
+        telephone: string;
+    }): Promise<factory.order.IOrderInquiryResult> {
         return this.fetch({
             uri: '/orders/findByOrderInquiryKey',
             method: 'POST',
