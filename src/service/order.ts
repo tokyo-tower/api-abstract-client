@@ -3,6 +3,10 @@ import { OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';
 
+export type IOrderInquiryResult = factory.order.IOrder & {
+    printToken: string;
+};
+
 /**
  * 注文サービス
  */
@@ -14,7 +18,7 @@ export class OrderService extends Service {
         performanceDay: string;
         paymentNo: string;
         telephone: string;
-    }): Promise<factory.order.IOrderInquiryResult> {
+    }): Promise<IOrderInquiryResult> {
         return this.fetch({
             uri: '/orders/findByOrderInquiryKey',
             method: 'POST',
