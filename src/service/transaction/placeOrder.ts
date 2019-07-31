@@ -78,7 +78,7 @@ export class PlaceOrderTransactionService extends Service {
         /**
          * 座席販売情報
          */
-        offers: factory.offer.seatReservation.IAcceptedOffer[];
+        offers: factory.action.authorize.seatReservation.IAcceptedOffer[];
     }): Promise<factory.action.authorize.seatReservation.IAction> {
         return this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/actions/authorize/seatReservation`,

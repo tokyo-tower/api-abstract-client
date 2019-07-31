@@ -6,6 +6,8 @@ import { OK } from 'http-status';
 
 import { Service } from '../service';
 
+export type ICorporation = factory.seller.IOrganization<factory.seller.IAttributes<factory.organizationType.Corporation>>;
+
 /**
  * 組織サービス
  */
@@ -18,7 +20,7 @@ export class OrganizationService extends Service {
          * 組織識別子
          */
         identifier: string;
-    }): Promise<factory.organization.corporation.IOrganization> {
+    }): Promise<ICorporation> {
         return this.fetch({
             uri: `/organizations/corporation/${params.identifier}`,
             method: 'GET',
