@@ -123,7 +123,7 @@ export class PlaceOrderTransactionService extends Service {
         /**
          * オーダーID
          */
-        orderId: string;
+        orderId?: string;
         /**
          * 金額
          */
