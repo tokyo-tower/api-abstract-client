@@ -13,7 +13,7 @@ export class TaskService extends Service {
     /**
      * タスク作成
      */
-    public async create(params: factory.task.IAttributes): Promise<factory.task.ITask> {
+    public async create<T extends TaskName>(params: factory.task.IAttributes<T>): Promise<factory.task.ITask<T>> {
         return this.fetch({
             uri: `/tasks/${params.name}`,
             method: 'POST',
@@ -29,7 +29,7 @@ export class TaskService extends Service {
     public async findById<T extends TaskName>(params: {
         name: T;
         id: string;
-    }): Promise<factory.task.ITask> {
+    }): Promise<factory.task.ITask<T>> {
         return this.fetch({
             uri: `/tasks/${params.name}/${params.id}`,
             method: 'GET',
@@ -41,9 +41,9 @@ export class TaskService extends Service {
     /**
      * タスク検索
      */
-    public async search(
+    public async search<T extends TaskName>(
         params: any
-    ): Promise<ISearchResult<factory.task.ITask[]>> {
+    ): Promise<ISearchResult<factory.task.ITask<T>[]>> {
         return this.fetch({
             uri: '/tasks',
             method: 'GET',

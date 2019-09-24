@@ -65,7 +65,6 @@ export class ReturnOrderTransactionService extends Service {
 
     /**
      * 確定した取引に関して、購入者にメール通知を送信する
-     * @returns {Promise<factory.task.sendEmailNotification.ITask>} メール送信タスク
      */
     public async sendEmailNotification(params: {
         /**
@@ -76,7 +75,7 @@ export class ReturnOrderTransactionService extends Service {
          * Eメールメッセージ属性
          */
         emailMessageAttributes: factory.creativeWork.message.email.IAttributes;
-    }): Promise<factory.task.sendEmailNotification.ITask> {
+    }): Promise<factory.task.ITask<factory.cinerino.taskName.SendEmailMessage>> {
         return this.fetch({
             uri: `/transactions/returnOrder/${params.transactionId}/tasks/sendEmailNotification`,
             method: 'POST',
