@@ -40,10 +40,6 @@ export class PlaceOrderTransactionService extends Service {
          */
         sellerIdentifier: string;
         /**
-         * 購入者区分
-         */
-        purchaserGroup: factory.person.Group;
-        /**
          * WAITER許可証トークン
          * 指定しなければ、バックエンドで許可証を発行しにいく
          */
@@ -53,10 +49,8 @@ export class PlaceOrderTransactionService extends Service {
             uri: '/transactions/placeOrder/start',
             method: 'POST',
             body: {
-                expires: params.expires,
-                seller_identifier: params.sellerIdentifier,
-                purchaser_group: params.purchaserGroup,
-                passportToken: params.passportToken
+                ...params,
+                seller_identifier: params.sellerIdentifier
             },
             expectedStatusCodes: [CREATED]
         })
@@ -180,23 +174,15 @@ export class PlaceOrderTransactionService extends Service {
          */
         transactionId: string;
         /**
-         * 購入者連絡先情報
+         * 購入者プロフィール
          */
-        contact: factory.transaction.placeOrder.ICustomerContact;
-    }): Promise<factory.transaction.placeOrder.ICustomerContact> {
+        contact: factory.transaction.placeOrder.ICustomerProfile;
+    }): Promise<factory.transaction.placeOrder.ICustomerProfile> {
         return this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/customerContact`,
             method: 'PUT',
             expectedStatusCodes: [CREATED],
-            body: {
-                last_name: params.contact.last_name,
-                first_name: params.contact.first_name,
-                email: params.contact.email,
-                tel: params.contact.tel,
-                age: params.contact.age,
-                gender: params.contact.gender,
-                address: params.contact.address
-            }
+            body: params.contact
         })
             .then(async (response) => response.json());
     }
@@ -237,7 +223,7 @@ export class PlaceOrderTransactionService extends Service {
          * Eメールメッセージ属性
          */
         emailMessageAttributes: factory.creativeWork.message.email.IAttributes;
-    }): Promise<factory.task.sendEmailNotification.ITask> {
+    }): Promise<factory.task.ITask<factory.cinerino.taskName.SendEmailMessage>> {
         return this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/tasks/sendEmailNotification`,
             method: 'POST',
