@@ -21,6 +21,10 @@ export interface IAuthorizeAction {
     id: string;
 }
 
+export interface IConfirmResponse extends factory.transaction.placeOrder.IResult {
+    printToken: string;
+}
+
 /**
  * 注文取引サービス
  */
@@ -199,7 +203,7 @@ export class PlaceOrderTransactionService extends Service {
          * 決済方法
          */
         paymentMethod: factory.paymentMethodType;
-    }): Promise<factory.transaction.placeOrder.IResult> {
+    }): Promise<IConfirmResponse> {
         return this.fetch({
             uri: `/transactions/placeOrder/${params.transactionId}/confirm`,
             method: 'POST',
