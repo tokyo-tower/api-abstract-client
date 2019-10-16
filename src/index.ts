@@ -9,12 +9,8 @@ import { AuthClient } from './auth/authClient';
 import { AdminService } from './service/admin';
 import { AggregateSalesService } from './service/aggregateSales';
 import { EventService } from './service/event';
-import { OrderService } from './service/order';
-import { OrganizationService } from './service/organization';
 import { ReservationService } from './service/reservation';
 import { TaskService } from './service/task';
-import { PlaceOrderTransactionService } from './service/transaction/placeOrder';
-import { ReturnOrderTransactionService } from './service/transaction/returnOrder';
 import * as transporters from './transporters';
 
 export import factory = factory;
@@ -40,14 +36,6 @@ export namespace service {
      */
     export class Event extends EventService { }
     /**
-     * 注文サービス
-     */
-    export class Order extends OrderService { }
-    /**
-     * 組織サービス
-     */
-    export class Organization extends OrganizationService { }
-    /**
      * 予約サービス
      */
     export class Reservation extends ReservationService { }
@@ -55,14 +43,4 @@ export namespace service {
      * タスクサービス
      */
     export class Task extends TaskService { }
-    export namespace transaction {
-        /**
-         * 注文取引サービス
-         */
-        export class PlaceOrder extends PlaceOrderTransactionService { }
-        /**
-         * 返品取引サービス
-         */
-        export class ReturnOrder extends ReturnOrderTransactionService { }
-    }
 }
