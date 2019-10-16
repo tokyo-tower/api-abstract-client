@@ -9,7 +9,6 @@ import { AuthClient } from './auth/authClient';
 import { AdminService } from './service/admin';
 import { AggregateSalesService } from './service/aggregateSales';
 import { EventService } from './service/event';
-import { OrganizationService } from './service/organization';
 import { ReservationService } from './service/reservation';
 import { TaskService } from './service/task';
 import * as transporters from './transporters';
@@ -36,10 +35,6 @@ export namespace service {
      * event service
      */
     export class Event extends EventService { }
-    /**
-     * 組織サービス
-     */
-    export class Organization extends OrganizationService { }
     /**
      * 予約サービス
      */
