@@ -4,7 +4,7 @@ import * as factory from '@tokyotower/factory';
 
 import { ISearchResult, Service } from '../service';
 
-export type TaskName = factory.taskName | factory.cinerino.taskName | string;
+export type TaskName = factory.taskName | string;
 
 /**
  * タスクサービス
