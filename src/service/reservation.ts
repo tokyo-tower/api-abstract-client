@@ -1,9 +1,7 @@
 import * as factory from '@tokyotower/factory';
-import { CREATED, NO_CONTENT, OK } from 'http-status';
+import { NO_CONTENT, OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';
-
-export interface IPublishPrintTokenResult { token: string; }
 
 /**
  * 予約サービス
@@ -105,20 +103,5 @@ export class ReservationService extends Service {
             body: params,
             expectedStatusCodes: [NO_CONTENT]
         });
-    }
-
-    /**
-     * 予約印刷トークン発行
-     */
-    public async publishPrintToken(params: {
-        ids: string[];
-    }): Promise<IPublishPrintTokenResult> {
-        return this.fetch({
-            uri: '/reservations/print/token',
-            method: 'POST',
-            body: params,
-            expectedStatusCodes: [CREATED]
-        })
-            .then(async (response) => response.json());
     }
 }

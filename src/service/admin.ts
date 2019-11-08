@@ -21,8 +21,7 @@ export interface IGroup {
 }
 
 /**
- * order service
- * @class
+ * 管理者サービス
  */
 export class AdminService extends Service {
     /**
@@ -36,6 +35,7 @@ export class AdminService extends Service {
         })
             .then(async (response) => response.json());
     }
+
     /**
      * ログイン中管理者のグループを取得する
      */
