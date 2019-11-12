@@ -3,6 +3,10 @@ import { NO_CONTENT, OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';
 
+export interface IPublishPaymentNoResult {
+    paymentNo: string;
+}
+
 /**
  * 予約サービス
  */
@@ -103,5 +107,20 @@ export class ReservationService extends Service {
             body: params,
             expectedStatusCodes: [NO_CONTENT]
         });
+    }
+
+    /**
+     * 購入番号を発行する
+     */
+    public async publishPaymentNo(params: {
+        event: { id: string };
+    }): Promise<IPublishPaymentNoResult> {
+        return this.fetch({
+            uri: '/reservations/publishPaymentNo',
+            method: 'POST',
+            body: params,
+            expectedStatusCodes: [OK]
+        })
+            .then(async (response) => response.json());
     }
 }
