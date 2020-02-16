@@ -108,19 +108,4 @@ export class ReservationService extends Service {
             expectedStatusCodes: [NO_CONTENT]
         });
     }
-
-    /**
-     * 購入番号を発行する
-     */
-    public async publishPaymentNo(params: {
-        event: { id: string };
-    }): Promise<IPublishPaymentNoResult> {
-        return this.fetch({
-            uri: '/reservations/publishPaymentNo',
-            method: 'POST',
-            body: params,
-            expectedStatusCodes: [OK]
-        })
-            .then(async (response) => response.json());
-    }
 }
