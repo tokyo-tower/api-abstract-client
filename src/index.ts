@@ -11,7 +11,6 @@ import { AggregateSalesService } from './service/aggregateSales';
 import { EventService } from './service/event';
 import { ReservationService } from './service/reservation';
 import { TaskService } from './service/task';
-import { TicketTypeCategoryRateLimitService } from './service/ticketTypeCategoryRateLimit';
 import * as transporters from './transporters';
 
 export import factory = factory;
@@ -44,9 +43,4 @@ export namespace service {
      * タスクサービス
      */
     export class Task extends TaskService { }
-
-    /**
-     * 券種カテゴリーレート制限サービス
-     */
-    export class TicketTypeCategoryRateLimit extends TicketTypeCategoryRateLimitService { }
 }

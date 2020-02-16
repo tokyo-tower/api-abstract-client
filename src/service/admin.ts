@@ -1,8 +1,3 @@
-/**
- * 管理者サービス
- * @namespace service.admin
- */
-
 import { OK } from 'http-status';
 
 import { Service } from '../service';
