@@ -23,6 +23,22 @@ export class ReservationService extends Service {
             .then(async (response) => response.json());
     }
 
+    public async findByOrderNumber(params: {
+        orderNumber: string;
+    }): Promise<ISearchResult<factory.reservation.event.IReservation[]>> {
+        return this.fetch({
+            uri: `/reservations/findByOrderNumber/${params.orderNumber}`,
+            method: 'GET',
+            qs: {},
+            expectedStatusCodes: [OK]
+        })
+            .then(async (response) => {
+                return {
+                    data: await response.json()
+                };
+            });
+    }
+
     /**
      * 予約検索
      */
