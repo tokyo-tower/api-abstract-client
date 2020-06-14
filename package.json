@@ -1,6 +1,6 @@
 {
   "name": "@motionpicture/ttts-api-abstract-client",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "description": "TTTS API abstract client library for Javascript.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
