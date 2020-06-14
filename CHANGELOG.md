@@ -10,17 +10,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 
-- update @tokyotower/factory
-
 ### Deprecated
 
 ### Removed
 
-- 管理者サービスを削除
-
 ### Fixed
 
 ### Security
+
+## v7.0.0 - 2020-06-14
+
+### Changed
+
+- update @tokyotower/factory
+
+### Removed
+
+- 管理者サービスを削除
 
 ## v6.3.0 - 2020-06-03
 
