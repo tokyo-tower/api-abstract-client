@@ -40,7 +40,7 @@ export class EventService extends Service {
 
     public async findPerofrmanceById(params: {
         id: string;
-    }): Promise<factory.performance.IPerformanceWithDetails> {
+    }): Promise<factory.performance.IPerformance> {
         return this.fetch({
             uri: `/performances/${params.id}`,
             method: 'GET',
