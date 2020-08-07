@@ -18,6 +18,29 @@ export class EventService extends Service {
     /**
      * イベント検索
      */
+    public async search(
+        /**
+         * 検索条件
+         */
+        params: factory.performance.ISearchConditions
+    ): Promise<ISearchResult<ISearchPerformancesResult>> {
+        return this.fetch({
+            uri: '/events',
+            method: 'GET',
+            qs: params,
+            expectedStatusCodes: [OK]
+        })
+            .then(async (response) => {
+                return {
+                    totalCount: Number(<string>response.headers.get('X-Total-Count')),
+                    data: await response.json()
+                };
+            });
+    }
+
+    /**
+     * イベント検索
+     */
     public async searchPerformances(
         /**
          * 検索条件
