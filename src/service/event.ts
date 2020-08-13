@@ -46,11 +46,9 @@ export class EventService extends Service {
     public async updateExtension(params: {
         id: string;
         reservationsAtLastUpdateDate?: factory.performance.IReservationAtLastupdateDate[];
-        onlineSalesStatus?: factory.performance.OnlineSalesStatus;
         onlineSalesStatusUpdateUser?: string;
         onlineSalesStatusUpdateAt?: Date;
         eventStatus?: factory.chevre.eventStatusType;
-        evServiceStatus?: factory.performance.EvServiceStatus;
         evServiceStatusUpdateUser?: string;
         evServiceStatusUpdateAt?: Date;
         refundStatus?: factory.performance.RefundStatus;
