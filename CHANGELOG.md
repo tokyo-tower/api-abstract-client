@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Removed
 
 - タスクサービスを削除
+- IDでのパフォーマンス検索サービスを削除
 
 ### Fixed
 

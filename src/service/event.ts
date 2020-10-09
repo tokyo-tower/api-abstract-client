@@ -32,17 +32,6 @@ export class EventService extends Service {
             });
     }
 
-    public async findPerofrmanceById(params: {
-        id: string;
-    }): Promise<factory.performance.IPerformance> {
-        return this.fetch({
-            uri: `/performances/${params.id}`,
-            method: 'GET',
-            expectedStatusCodes: [OK]
-        })
-            .then(async (response) => response.json());
-    }
-
     public async updateExtension(params: {
         id: string;
         reservationsAtLastUpdateDate?: factory.performance.IReservationAtLastupdateDate[];
