@@ -10,18 +10,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 
-- update @tokyotower/factory
-
 ### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## v8.0.0 - 2020-10-26
+
+### Changed
+
+- update @tokyotower/factory
 
 ### Removed
 
 - タスクサービスを削除
 - IDでのパフォーマンス検索サービスを削除
-
-### Fixed
-
-### Security
 
 ## v7.5.0 - 2020-08-13
 
