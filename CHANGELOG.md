@@ -18,6 +18,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Security
 
+## v8.0.0 - 2020-10-26
+
+### Changed
+
+- update @tokyotower/factory
+
+### Removed
+
+- タスクサービスを削除
+- IDでのパフォーマンス検索サービスを削除
+
 ## v7.5.0 - 2020-08-13
 
 ### Changed
