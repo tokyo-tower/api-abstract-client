@@ -3,10 +3,6 @@ import { NO_CONTENT, OK } from 'http-status';
 
 import { ISearchResult, Service } from '../service';
 
-export interface IPublishPaymentNoResult {
-    paymentNo: string;
-}
-
 /**
  * 予約サービス
  */
@@ -21,22 +17,6 @@ export class ReservationService extends Service {
             expectedStatusCodes: [OK]
         })
             .then(async (response) => response.json());
-    }
-
-    public async findByOrderNumber(params: {
-        orderNumber: string;
-    }): Promise<ISearchResult<factory.reservation.event.IReservation[]>> {
-        return this.fetch({
-            uri: `/reservations/findByOrderNumber/${params.orderNumber}`,
-            method: 'GET',
-            qs: {},
-            expectedStatusCodes: [OK]
-        })
-            .then(async (response) => {
-                return {
-                    data: await response.json()
-                };
-            });
     }
 
     /**
