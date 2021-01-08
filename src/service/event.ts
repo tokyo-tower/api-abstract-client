@@ -32,8 +32,12 @@ export class EventService extends Service {
             });
     }
 
+    /**
+     * 拡張属性を更新する
+     */
     public async updateExtension(params: {
         id: string;
+        checkedReservations?: factory.performance.ICheckedReservation[];
         reservationsAtLastUpdateDate?: factory.performance.IReservationAtLastupdateDate[];
         onlineSalesStatusUpdateUser?: string;
         onlineSalesStatusUpdateAt?: Date;

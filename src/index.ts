@@ -6,9 +6,8 @@ import * as factory from '@tokyotower/factory';
 
 import { AuthClient } from './auth/authClient';
 
-import { AggregateSalesService } from './service/aggregateSales';
 import { EventService } from './service/event';
-import { ReservationService } from './service/reservation';
+import { SalesReportService } from './service/salesReport';
 import * as transporters from './transporters';
 
 export import factory = factory;
@@ -22,15 +21,11 @@ export abstract class Auth extends AuthClient { }
 
 export namespace service {
     /**
-     * 売上集計サービス
+     * 売上レポートサービス
      */
-    export class AggregateSales extends AggregateSalesService { }
+    export class SalesReport extends SalesReportService { }
     /**
-     * event service
+     * イベントサービス
      */
     export class Event extends EventService { }
-    /**
-     * 予約サービス
-     */
-    export class Reservation extends ReservationService { }
 }

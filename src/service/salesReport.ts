@@ -3,9 +3,9 @@ import { OK } from 'http-status';
 import { Service } from '../service';
 
 /**
- * 売上集計サービス
+ * 売上レポートサービス
  */
-export class AggregateSalesService extends Service {
+export class SalesReportService extends Service {
     /**
      * ストリーミング検索
      */
