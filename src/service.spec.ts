@@ -9,20 +9,8 @@ import * as sinon from 'sinon';
 
 import { StubAuthClient } from './auth/authClient';
 import { Service } from './service';
-import { DefaultTransporter, Transporter } from './transporters';
+import { DefaultTransporter, StubTransporter } from './transporters';
 
-/**
- * スタブトランポーター
- */
-class StubTransporter implements Transporter {
-    public body: any;
-    constructor(body: any) {
-        this.body = body;
-    }
-    public async fetch(_: string, options: RequestInit) {
-        return new Response(this.body, options);
-    }
-}
 const API_ENDPOINT = 'https://example.com';
 
 describe('fetch()', () => {
@@ -42,10 +30,14 @@ describe('fetch()', () => {
         const auth = new StubAuthClient();
         const service = new Service({
             auth: auth,
-            endpoint: API_ENDPOINT
+            endpoint: API_ENDPOINT,
+            project: { id: 'xxx' }
         });
 
-        sandbox.mock(service.options.auth).expects('fetch').once().resolves(response);
+        sandbox.mock(service.options.auth)
+            .expects('fetch')
+            .once()
+            .resolves(response);
 
         const result = await service.fetch(<any>{});
 
@@ -83,8 +75,11 @@ describe('fetch()', () => {
             endpoint: API_ENDPOINT
         });
 
-        sandbox.mock(service.options.auth).expects('fetch').once()
-            .withArgs(sinon.match(new RegExp(`\\?${querystrings}$`))).resolves(response);
+        sandbox.mock(service.options.auth)
+            .expects('fetch')
+            .once()
+            .withArgs(sinon.match(new RegExp(`\\?${querystrings}$`)))
+            .resolves(response);
 
         const result = await service.fetch(<any>options);
         assert.deepEqual(result, response);
@@ -108,8 +103,11 @@ describe('fetch()', () => {
             endpoint: API_ENDPOINT
         });
 
-        sandbox.mock(service.options.auth).expects('fetch').once()
-            .withArgs(sinon.match(new RegExp(`\\?${querystrings}$`))).resolves(response);
+        sandbox.mock(service.options.auth)
+            .expects('fetch')
+            .once()
+            .withArgs(sinon.match(new RegExp(`\\?${querystrings}$`)))
+            .resolves(response);
 
         const result = await service.fetch(<any>options);
 
@@ -123,7 +121,9 @@ describe('fetch()', () => {
             endpoint: API_ENDPOINT
         });
 
-        sandbox.mock(DefaultTransporter.prototype).expects('fetch').once();
+        sandbox.mock(DefaultTransporter.prototype)
+            .expects('fetch')
+            .once();
 
         await service.fetch(<any>options);
         sandbox.verify();

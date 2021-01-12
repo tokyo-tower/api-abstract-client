@@ -21,7 +21,12 @@ export interface IOptions {
      * transporter object
      */
     transporter?: Transporter;
+    /**
+     * サービスを使用するプロジェクト
+     */
+    project?: { id?: string };
 }
+
 export interface IFetchOptions {
     uri: string;
     form?: any;
@@ -33,14 +38,17 @@ export interface IFetchOptions {
     body?: any;
     expectedStatusCodes: number[];
 }
+
 /**
  * base service class
  */
 export class Service {
     public options: IOptions;
+
     constructor(options: IOptions) {
         this.options = options;
     }
+
     /**
      * Create and send request to API
      */
@@ -52,7 +60,15 @@ export class Service {
         // tslint:disable-next-line:no-parameter-reassignment
         options = { ...defaultOptions, ...options };
 
-        const baseUrl = this.options.endpoint;
+        let baseUrl = this.options.endpoint;
+        // tslint:disable-next-line:no-single-line-block-comment
+        /* istanbul ignore else */
+        if (this.options.project !== undefined
+            && this.options.project !== null
+            && typeof this.options.project.id === 'string'
+            && this.options.project.id.length > 0) {
+            baseUrl = `${baseUrl}/projects/${this.options.project.id}`;
+        }
         let url = `${baseUrl}${options.uri}`;
 
         const querystrings = qs.stringify(options.qs);
@@ -83,6 +99,7 @@ export class Service {
         }
     }
 }
+
 /**
  * 検索結果インターフェース
  */
