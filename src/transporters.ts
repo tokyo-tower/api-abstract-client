@@ -13,7 +13,7 @@ const debug = createDebug('ttts-api-abstract-client:transporters');
  * トランスポーター抽象クラス
  */
 export abstract class Transporter {
-    public abstract async fetch(url: string, options: RequestInit): Promise<Response>;
+    public abstract fetch(url: string, options: RequestInit): Promise<Response>;
 }
 export type IBodyResponseCallback = Promise<Response>;
 /**
@@ -29,7 +29,6 @@ export class RequestError extends Error {
         this.name = 'TTTSRequestError';
     }
 }
-
 /**
  * DefaultTransporter
  */
@@ -100,5 +99,20 @@ export class DefaultTransporter implements Transporter {
             return response;
         }
         throw err;
+    }
+}
+
+/**
+ * スタブトランポーター
+ */
+export class StubTransporter implements Transporter {
+    public body: any;
+
+    constructor(body: any) {
+        this.body = body;
+    }
+
+    public async fetch(_: string, options: RequestInit) {
+        return new Response(this.body, options);
     }
 }
