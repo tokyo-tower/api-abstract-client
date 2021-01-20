@@ -19,7 +19,7 @@ export class EventService extends Service {
      */
     public async search(params: factory.performance.ISearchConditions): Promise<ISearchResult<ISearchPerformancesResult>> {
         return this.fetch({
-            uri: '/events',
+            uri: '/performances',
             method: 'GET',
             qs: params,
             expectedStatusCodes: [OK]
@@ -47,6 +47,9 @@ export class EventService extends Service {
         refundStatus?: factory.performance.RefundStatus;
         refundStatusUpdateUser?: string;
         refundStatusUpdateAt?: Date;
+        startDate?: Date;
+        endDate?: Date;
+        additionalProperty?: factory.chevre.propertyValue.IPropertyValue<string>[];
     }): Promise<void> {
         await this.fetch({
             uri: `/performances/${params.id}/extension`,
